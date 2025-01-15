@@ -25,9 +25,9 @@ class CountWords:
     def __calc(self):
         with open(self.__path) as fl:
             for row in fl:
-                self.__count_of_rows+=1
-                self.__count_of_chars +=len(row)
-                self.__count_of_words +=len(row.split())
+                self.__count_of_rows += 1
+                self.__count_of_chars += len(row)
+                self.__count_of_words += len(row.split())
 
     def __str__(self):
         return (
