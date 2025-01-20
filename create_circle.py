@@ -66,10 +66,12 @@ class Circle:
 
     @classmethod
     def calc_area_by_radius(cls, radius):
+        Circle.check_radius(radius=radius)
         return Circle.pi() * pow(decimal.Decimal(str(radius)),2)
 
     @classmethod
     def calc_circumference_by_radius(cls, radius):
+        Circle.check_radius(radius=radius)
         return 2 * Circle.pi() * decimal.Decimal(str(radius))
 
     def __init__(
