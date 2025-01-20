@@ -11,5 +11,3 @@ class SubTuple:
     @property
     def is_sub_tuple(self):
         return SubTuple.is_sub_tuple_(first=self.__first, second=self.__second)
-
-print(SubTuple(first=(1,2,3),second=(2,3,4)).is_sub_tuple)
