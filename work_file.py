@@ -66,25 +66,24 @@ class SampleFile(UFileTests):
             file.writelines(self.__content)
 
 class UFile:
-
     @staticmethod
-    def exists(path, raise_error = False):
-        result = os.path.exists(path)
+    def exists(path_, raise_error = False):
+        result = os.path.exists(path_)
         if raise_error and not result:
             raise FileNotFoundError
         return result
 
-    def __init__(self, path):
+    def __init__(self, path_):
         self.__path_to_file = None
-        self.__set_path(path)
+        self.__set_path(path_)
         self.__content = ''
         self.__load()
-        self.__list_content =[]
+        self.__list_content = []
         self.__list()
 
-    def __set_path(self, path):
-        UFile.exists(path, raise_error = True)
-        self.__path_to_file = path
+    def __set_path(self, path_):
+        UFile.exists(path_, raise_error = True)
+        self.__path_to_file = path_
 
     def __load(self):
         with open(self.__path_to_file) as file:
@@ -97,9 +96,9 @@ class UFile:
     def content(self):
         return self.__list_content
 
-path = '/home/georgeiiister/txt/file3.txt'
-f = SampleFile(name=path)
+path_to_file = '/home/georgeiiister/txt/file3.txt'
+f = SampleFile(name=path_to_file)
 f.write()
 
-f = UFile(path)
+f = UFile(path_to_file)
 print(*f.content,sep='\n')
