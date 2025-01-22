@@ -33,7 +33,7 @@ class SampleFile(UFileTests):
                             f'{rs(self.__ascii_letters, self.__num_chars)}'
                             f'{self.__end_of_row }'
                             for i in range(self.__num_rows)
-                           ]
+                         ]
 
     @property
     def content(self):
