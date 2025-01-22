@@ -17,7 +17,7 @@ class CountWords:
         self.__calc()
 
     def __file(self):
-        self.__path = self.__path or input('Enter file path>> ')
+        self.__path = self.__path or input('Enter file ppath>> ')
         if not os.path.exists(self.__path):
             self.__path = None
             raise PathFileError
