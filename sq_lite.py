@@ -2,7 +2,7 @@ import sqlite3
 import string
 import random
 
-class seq:
+class Seq:
     def __init__(self, start:int = 1, stop:int = 100_000_000, step:int = 1):
         self.__start = start
         self.__stop = stop
