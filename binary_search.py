@@ -1,44 +1,61 @@
 import copy
-class Search:
+
+
+class BinSearch:
     @staticmethod
-    def hops_by_bin_search(size_array)->int:
+    def hops_by_bin_search(size) -> int:
         import math
-        return round(math.log2(size_array))
+        return round(math.log2(size))
 
     @staticmethod
-    def bin_exists(array, value, sort = False)->bool:
-        array_copy = copy.copy(array) if not sort else sorted(copy.copy(array))
-        result = False
-        div2 = 0
-        if array_copy and array_copy[-1] >= value:
-            while len(array_copy) > 1:
-                if array_copy[-1] == value:
-                    result = True
-                    break
+    def bin_search(collection, value, sort=False):
+        collection_copy = copy.copy(collection) if not sort else sorted(copy.copy(collection))
+        result = None
+        if collection_copy and collection_copy[-1] >= value:
+            while len(collection_copy) > 1:
+                div2 = int(len(collection_copy) / 2)
+                if collection_copy[:div2][-1] >= value:
+                    collection_copy = collection_copy[:div2]
                 else:
-                    div2 = int(len(array_copy)/2)
-                    if array_copy[:div2][-1]>=value:
-                        array_copy = array_copy[:div2]
-                    else:
-                        array_copy = array_copy[div2:]
+                    collection_copy = collection_copy[div2:]
+        if collection_copy[0] == value:
+            result = collection_copy[0]
         return result
 
-    def __init__(self, array):
-        self.__array = array
-        self.__exists = None
+    @staticmethod
+    def bin_exists(collection, value, sort=False) -> bool:
+        return bool(BinSearch.bin_search(collection=iobject,
+                                         value=value,
+                                         sort=sort
+                                         ))
+
+    def __init__(self, collection):
+        self.__collection = collection
         self.__value = None
-        self.__hops_by_bin_search = Search.hops_by_bin_search(size_array = len(self.__array))
+        f_hops = BinSearch.hops_by_bin_search
+        self.__hops_by_bin_search = f_hops(size=len(self.__collection))
 
     @property
-    def hops_bin(self):
+    def hops(self):
         return self.__hops_by_bin_search
 
-    def exists(self,value):
-        self.__value = value
-        if self.__exists is None:
-            self.__exists = Search.bin_exists(array = self.__array,value = self.__value)
-        return self.__exists
+    def exists(self, value):
+        result = False
+        if value ==  self.__value:
+            result = True
+        else:
+            if BinSearch.bin_exists(collection=self.__collection, value=self.__value):
+                self.__value = value
+            else:
+                result = False
+        return result
 
+    def search(self, value):
+        self.__value = BinSearch.bin_search(collection=self.__collection,
+                                             value=value
+                                           )
+        return self.__value
 
-obj = Search(array = tuple(range(1_000_000_0)))
-print(obj.hops_bin)
+import array
+my_obj = BinSearch(collection=array.array('i', tuple(range(1000_000_0))))
+print(my_obj.search(900))
