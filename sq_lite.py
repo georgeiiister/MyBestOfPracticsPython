@@ -27,7 +27,7 @@ class User:
     __select_sql = f'select * from {__table} where id=?'
     __update_sql = f'update {__table} set username=?,email=?, age=? where id=?'
 
-    __seq = seq()
+    __seq = Seq()
 
     @classmethod
     def create_table(cls,cursor):
@@ -131,9 +131,9 @@ for j, i in enumerate(usr):
     i.save()
     if j%1000 == 0:
         connect.commit()
+connect.commit()
 
 usr1 = User(id=9,cursor = cur1)
 
 print(usr1)
 
-connect.commit()
