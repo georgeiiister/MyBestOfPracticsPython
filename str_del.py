@@ -13,6 +13,6 @@ class StrDiv:
                     part.clear()
         return result
 
-a = StrDiv('abcdfg')
+a = StrDiv('abcdfgklklkp')
 
 print(a/3)
