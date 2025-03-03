@@ -7,6 +7,11 @@ class Bin2Int:
         return sum(((2**exp)*int(value)
                     for exp, value in enumerate(reversed(tuple(bin_value.upper().lstrip('0B'))))))
 
+    @staticmethod
+    def bin2int_(bin_value) -> int:
+        """function with realization base transformation with builtin methods"""
+        return int(bin_value,2)
+
     def __init__(self, bin_value:str):
         self.__bin_value = bin_value
         self.__int = None
@@ -16,6 +21,13 @@ class Bin2Int:
         """get decimal value from binary"""
         if self.__int is None:
             self.__int = Bin2Int.bin2int(bin_value = self.__bin_value)
+        return self.__int
+
+    @property
+    def int_(self):
+        """get decimal value from binary"""
+        if self.__int is None:
+            self.__int = Bin2Int.bin2int_(bin_value=self.__bin_value)
         return self.__int
 
 
