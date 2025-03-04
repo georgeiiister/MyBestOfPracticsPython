@@ -35,7 +35,7 @@ if __name__ == '__main__':
     import random
     examples = ((k[0],k[1],Bin2Int(bin_value = k[1]).int)
                 for k in ((j, bin(j))
-                          for j in (random.randint(1,1000) for i in range(50))))
+                          for j in (random.randint(1,1000) for i in range(100))))
     print(f'{"bin value":>14}|{"dec value":>8}|{"result value":>12}|{"status"}')
     for item in examples:
         print(f'{item[1]:>14}|{item[0]:>9}|{item[2]:>12}|{"+" if item[0] == item[2] else "-":>2}')
