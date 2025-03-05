@@ -25,8 +25,8 @@ class Grabby(threading.Thread):
 mrSmitty = Grabby(name='mrSmitty', sort_out_objects = objects)
 msSmitty = Grabby(name='msSmitty', sort_out_objects = objects)
 
-mrSmitty.run()
-msSmitty.run()
+mrSmitty.start()
+msSmitty.start()
 
 for grabby in (mrSmitty, msSmitty):
     print(grabby.objects)
