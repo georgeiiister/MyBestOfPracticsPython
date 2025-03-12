@@ -8,23 +8,22 @@ class Progress:
         self.__step = step
         self.__progress = ''
 
-    @property
-    def progress(self):
+    def show(self):
         return self.__progress
 
-    @progress.setter
-    def progress(self,value=None):
-        if value is None:
-            value = 1
+    def next(self,value=1):
         self.__progress = f'{self.__progress}{value*Progress.item_progress}'
 
     def demo(self):
         for i in range(self.__begin, self.__end, self.__step):
             time.sleep(1)
-            self.progress=None
-            print(self.progress, end = '')
+            self.next()
+            print('\b'*len(self.__progress),end='')
+            print(self.show(),end='')
+
+    def __init(self):
+        raise NotImplemented
 
 if __name__ == '__main__':
-    progress_sample = Progress(1,10,1)
+    progress_sample = Progress(1,20,1)
     progress_sample.demo()
-
