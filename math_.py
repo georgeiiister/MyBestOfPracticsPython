@@ -1,3 +1,4 @@
+from functools import reduce
 class Operations:
     operators = {'*':'X','+':'+','/':':','//':':','**':'^'}
 
@@ -73,6 +74,30 @@ class Int2list:
             self.__list_reverse = list(reversed(list(str(self.__num))))
         return self.__list_reverse
 
+class Factorial:
+    class FactorialError(Exception):
+        pass
+
+    class SignValueFactorialError(FactorialError):
+        pass
+    def __init__(self, value):
+        self.__value = int(value)
+        if self.__value < 0:
+            raise SignValueFactorialError
+
+        self.__factorial = self.__factorial_(value = self.__value)
+
+    def __factorial_(self, value:int)->int:
+        result = 0
+        if value > 0:
+            result = reduce(lambda i,j:i*j, range(1,value+1))
+        return result
+
+    @property
+    def factorial(self):
+        return self.__factorial
+
 #print(*Operations().operation,sep='\n')
 #print(Power(10,10).power2)
 print(Int2list(1234567).reverse)
+print(Factorial(value = input('value for factorial>> ')).factorial)
