@@ -1,6 +1,6 @@
 import time
 class Progress:
-    item_progress = chr(9646)
+    item_progress = chr(9646) #symbol for item progressbar
 
     def __init__(self, begin=0, end=100, step=1):
         self.__begin = begin
