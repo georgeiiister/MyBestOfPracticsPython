@@ -1,4 +1,6 @@
+import math
 from functools import reduce
+
 class Operations:
     operators = {'*':'X','+':'+','/':':','//':':','**':'^'}
 
@@ -26,7 +28,6 @@ class Operations:
 
         return self.__result
 
-import math
 class Power:
     def __init__(self, a,b):
         self.__a = a
@@ -97,7 +98,38 @@ class Factorial:
     def factorial(self):
         return self.__factorial
 
+class PrimeNumber:
+    @staticmethod
+    def prime_number(value:int)->bool:
+        result = False
+        for j in range(2, int(math.sqrt(value)) + 1):
+            if value % j == 0:
+                break;
+        else:
+            result = True
+        return result
+    @staticmethod
+    def prime_number_in_range(begin_range:int, end_range:int)->list:
+        result = []
+        for i in range(begin_range,end_range):
+            if PrimeNumber.prime_number(value = i):
+                result.append(i)
+        return result
+
+    def __init__(self, begin_range:int, end_range:int):
+        self.__begin_range = begin_range;
+        self.__end_range = end_range;
+        self.__prime_number_list = PrimeNumber.prime_number_in_range(begin_range = begin_range,
+                                                                  end_range = end_range);
+
+    @property
+    def pn(self):
+        return self.__prime_number_list;
+
+
 #print(*Operations().operation,sep='\n')
 #print(Power(10,10).power2)
-print(Int2list(1234567).reverse)
-print(Factorial(value = input('value for factorial>> ')).factorial)
+#print(Int2list(1234567).reverse)
+#print(Factorial(value = input('value for factorial>> ')).factorial)
+print(PrimeNumber.prime_number(7399))
+print(*PrimeNumber(2,1001).pn,sep='\n')
