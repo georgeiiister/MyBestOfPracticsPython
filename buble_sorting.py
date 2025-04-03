@@ -1,4 +1,10 @@
+import copy
 class BS:
+    @staticmethod
+    def sorted_b(obj):
+        raise NotImplemented
+
+
     @staticmethod
     def sorted(obj):
         result = []
@@ -19,6 +25,10 @@ class BS:
 
     def sort(self):
         self.__obj_sorted = self.__obj_sorted or BS.sorted(obj = self.__obj)
+        return self.__obj_sorted
+
+    def sort_b(self):
+        self.__obj_sorted = self.__obj_sorted or BS.sorted_b(obj = self.__obj)
         return self.__obj_sorted
 
 a = (1,2,3,-190,1000,0,900)
