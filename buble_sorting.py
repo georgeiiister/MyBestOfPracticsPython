@@ -2,7 +2,11 @@ import copy
 class BS:
     @staticmethod
     def sorted_b(obj):
-        raise NotImplemented
+        result = list(obj)
+        for i in result[1:]:
+            pass #ToDo buble!
+
+        return type(obj)(result)
 
 
     @staticmethod

@@ -132,4 +132,4 @@ class PrimeNumber:
 #print(Int2list(1234567).reverse)
 #print(Factorial(value = input('value for factorial>> ')).factorial)
 print(PrimeNumber.prime_number(7399))
-print(*PrimeNumber(2,1001).pn,sep='\n')
+print(*PrimeNumber(2,101).pn,sep='\n')
