@@ -1,6 +1,23 @@
 import math
 from functools import reduce
 
+class LastNumber:
+    def __init__(self, number:int, digit:int):
+        self.__number = number
+        if digit not in range(0,10):
+            raise ValueError
+        self.__digit = digit
+
+
+    @property
+    def yes(self):
+        return self.__number % 10 == self.__digit
+
+    @property
+    def yes2(self):
+        return int(str(self.__number)[-1]) == self.__digit
+
+
 class Operations:
     operators = {'*':'X','+':'+','/':':','//':':','**':'^'}
 
@@ -133,3 +150,4 @@ class PrimeNumber:
 #print(Factorial(value = input('value for factorial>> ')).factorial)
 print(PrimeNumber.prime_number(7399))
 print(*PrimeNumber(2,101).pn,sep='\n')
+print(LastNumber(302,2).yes, LastNumber(302,2).yes2)
