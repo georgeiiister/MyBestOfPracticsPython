@@ -32,7 +32,7 @@ class Operations:
     @property
     def operation(self):
         if self.__numbers is None:
-            self.__numbers = [input(f'input number >> ') for i in range(2)]
+            self.__numbers = [input(f'input number >> ') for _ in range(2)]
 
         operators = Operations.operators
 
@@ -98,14 +98,16 @@ class Factorial:
 
     class SignValueFactorialError(FactorialError):
         pass
+
     def __init__(self, value):
         self.__value = int(value)
         if self.__value < 0:
-            raise SignValueFactorialError
+            raise Factorial.SignValueFactorialError
 
-        self.__factorial = self.__factorial_(value = self.__value)
+        self.__factorial = Factorial.__factorial(value = self.__value)
 
-    def __factorial_(self, value:int)->int:
+    @staticmethod
+    def __factorial(value:int)->int:
         result = 0
         if value > 0:
             result = reduce(lambda i,j:i*j, range(1,value+1))
@@ -121,7 +123,7 @@ class PrimeNumber:
         result = False
         for j in range(2, int(math.sqrt(value)) + 1):
             if value % j == 0:
-                break;
+                break
         else:
             result = True
         return result
@@ -134,14 +136,14 @@ class PrimeNumber:
         return result
 
     def __init__(self, begin_range:int, end_range:int):
-        self.__begin_range = begin_range;
-        self.__end_range = end_range;
+        self.__begin_range = begin_range
+        self.__end_range = end_range
         self.__prime_number_list = PrimeNumber.prime_number_in_range(begin_range = begin_range,
-                                                                  end_range = end_range);
+                                                                  end_range = end_range)
 
     @property
     def pn(self):
-        return self.__prime_number_list;
+        return self.__prime_number_list
 
 
 #print(*Operations().operation,sep='\n')
