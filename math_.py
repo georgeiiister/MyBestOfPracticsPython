@@ -145,11 +145,29 @@ class PrimeNumber:
     def pn(self):
         return self.__prime_number_list
 
+class MM:
+    @staticmethod
+    def m_x(obj, ttype = 1):
+        """ttype: 1 - max, 0 - min"""
+        result = None
+        mx_by_type = {
+                        1:lambda r, i: i if r < i else r
+                      , 0:lambda r, i: i if r > i else r
+                      }
+        for i in obj:
+            try:
+                result = mx_by_type.get(ttype)(result, i)
+            except TypeError:
+                result = i
+        return result
+
+
 
 #print(*Operations().operation,sep='\n')
 #print(Power(10,10).power2)
 #print(Int2list(1234567).reverse)
 #print(Factorial(value = input('value for factorial>> ')).factorial)
-print(PrimeNumber.prime_number(7399))
-print(*PrimeNumber(2,101).pn,sep='\n')
+#print(PrimeNumber.prime_number(7399))
+#print(*PrimeNumber(2,101).pn,sep='\n')
 print(LastNumber(302,2).yes, LastNumber(302,2).yes2)
+print(MM.m_x((-1,2,3),0))
