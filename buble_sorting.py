@@ -1,16 +1,20 @@
 import copy
 class BS:
     @staticmethod
-    def sorted_b(obj):
+    def sorted_buble_(obj):
         result = list(obj)
-        for i in result[1:]:
-            pass #ToDo buble!
-
+        j = 1
+        while j<len(result):
+            k = len(result)-1
+            while j <= k:
+                if result[k-1] > result[k]:
+                    result[k-1], result[k] = result[k], result[k-1]
+                k-=1
+            j+=1
         return type(obj)(result)
 
-
     @staticmethod
-    def sorted(obj):
+    def sorted_as_list_(obj):
         result = []
         if obj:
             result.append(obj[0])
@@ -27,15 +31,16 @@ class BS:
         self.__obj = obj
         self.__obj_sorted = None
 
-    def sort(self):
-        self.__obj_sorted = self.__obj_sorted or BS.sorted(obj = self.__obj)
+    def sorted_as_list(self):
+        self.__obj_sorted = self.__obj_sorted or BS.sorted_as_list_(obj = self.__obj)
         return self.__obj_sorted
 
-    def sort_b(self):
-        self.__obj_sorted = self.__obj_sorted or BS.sorted_b(obj = self.__obj)
+    def sorted_buble(self):
+        self.__obj_sorted = self.__obj_sorted or BS.sorted_buble_(obj = self.__obj)
         return self.__obj_sorted
 
 a = (1,2,3,-190,1000,0,900)
-print(BS.sorted(a))
+print(BS(a).sorted_as_list())
+print(BS(a).sorted_buble())
 
 
