@@ -2,13 +2,13 @@ import math
 from functools import reduce
 from decimal import Decimal
 
-class Ssum:
+class UserSum:
     @staticmethod
-    def __ssum1(obj):
+    def __user_sum1(obj):
         return sum(obj)
 
     @staticmethod
-    def __ssum2(obj):
+    def __user_sum2(obj):
         result = Decimal('0')
         for i in obj:
             result+=i
@@ -17,22 +17,22 @@ class Ssum:
     def __init__(self, obj):
         self.__obj = obj
         self.__decimal_obj = (Decimal(str(i)) for i in obj)
-        self.__ssum = None
-        self.__decimal_ssum = None
+        self.__user_sum = None
+        self.__decimal_sum = None
 
     @property
     def sum1(self):
-        if self.__decimal_ssum is None:
-            self.__decimal_ssum = Ssum.__ssum1(obj=self.__obj)
-            self.__ssum = type(self.__obj[0])(self.__decimal_ssum)
-        return self.__ssum
+        if self.__decimal_sum is None:
+            self.__decimal_sum = UserSum.__user_sum1(obj=self.__obj)
+            self.__user_sum = type(self.__obj[0])(self.__decimal_sum)
+        return self.__user_sum
 
     @property
     def sum2(self):
-        if self.__decimal_ssum is None:
-            self.__decimal_ssum = Ssum.__ssum2(obj=self.__obj)
-            self.__ssum = type(self.__obj[0])(self.__decimal_ssum)
-        return self.__ssum
+        if self.__decimal_sum is None:
+            self.__decimal_sum = UserSum.__user_sum2(obj=self.__obj)
+            self.__user_sum = type(self.__obj[0])(self.__decimal_sum)
+        return self.__user_sum
 
 class LastNumber:
     def __init__(self, number:int, digit:int):
@@ -171,8 +171,10 @@ class PrimeNumber:
     def __init__(self, begin_range:int, end_range:int):
         self.__begin_range = begin_range
         self.__end_range = end_range
-        self.__prime_number_list = PrimeNumber.prime_number_in_range(begin_range = begin_range,
-                                                                  end_range = end_range)
+        self.__prime_number_list = PrimeNumber.prime_number_in_range(
+                                                                     begin_range = begin_range,
+                                                                     end_range = end_range
+                                                                     )
 
     @property
     def pn(self):
@@ -203,4 +205,4 @@ class MM:
 #print(*PrimeNumber(2,101).pn,sep='\n')
 #print(LastNumber(302,2).yes, LastNumber(302,2).yes2)
 #print(MM.m_x((-1,2,3),0))
-print(Ssum((1,2,3)).sum1)
+print(UserSum((1,2,3)).sum1)
