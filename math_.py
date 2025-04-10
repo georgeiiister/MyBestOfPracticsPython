@@ -101,14 +101,14 @@ class Factorial:
 
     def __init__(self, value):
         self.__value = int(value)
-        if self.__value < 0:
+        if self.__value <= 0:
             raise Factorial.SignValueFactorialError
 
         self.__factorial = Factorial.__factorial(value = self.__value)
 
     @staticmethod
     def __factorial(value:int)->int:
-        result = 0
+        result = None
         if value > 0:
             result = reduce(lambda i,j:i*j, range(1,value+1))
         return result
