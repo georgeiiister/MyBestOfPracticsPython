@@ -1,5 +1,38 @@
 import math
 from functools import reduce
+from decimal import Decimal
+
+class Ssum:
+    @staticmethod
+    def __ssum1(obj):
+        return sum(obj)
+
+    @staticmethod
+    def __ssum2(obj):
+        result = Decimal('0')
+        for i in obj:
+            result+=i
+        return result
+
+    def __init__(self, obj):
+        self.__obj = obj
+        self.__decimal_obj = (Decimal(str(i)) for i in obj)
+        self.__ssum = None
+        self.__decimal_ssum = None
+
+    @property
+    def sum1(self):
+        if self.__decimal_ssum is None:
+            self.__decimal_ssum = Ssum.__ssum1(obj=self.__obj)
+            self.__ssum = type(self.__obj[0])(self.__decimal_ssum)
+        return self.__ssum
+
+    @property
+    def sum2(self):
+        if self.__decimal_ssum is None:
+            self.__decimal_ssum = Ssum.__ssum2(obj=self.__obj)
+            self.__ssum = type(self.__obj[0])(self.__decimal_ssum)
+        return self.__ssum
 
 class LastNumber:
     def __init__(self, number:int, digit:int):
@@ -162,12 +195,12 @@ class MM:
         return result
 
 
-
 #print(*Operations().operation,sep='\n')
 #print(Power(10,10).power2)
 #print(Int2list(1234567).reverse)
 #print(Factorial(value = input('value for factorial>> ')).factorial)
 #print(PrimeNumber.prime_number(7399))
 #print(*PrimeNumber(2,101).pn,sep='\n')
-print(LastNumber(302,2).yes, LastNumber(302,2).yes2)
-print(MM.m_x((-1,2,3),0))
+#print(LastNumber(302,2).yes, LastNumber(302,2).yes2)
+#print(MM.m_x((-1,2,3),0))
+print(Ssum((1,2,3)).sum1)

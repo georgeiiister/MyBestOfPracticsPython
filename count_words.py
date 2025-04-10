@@ -1,4 +1,5 @@
 import os
+import string
 
 class CountWordsError(Exception):
     pass
@@ -13,6 +14,7 @@ class CountWords:
         self.__count_of_rows = 0
         self.__count_of_words = 0
         self.__count_of_chars = 0
+        self.__count_of_upper_chars = 0
         self.__file()
         self.__calc()
 
@@ -27,14 +29,16 @@ class CountWords:
             for row in fl:
                 self.__count_of_rows += 1
                 self.__count_of_chars += len(row)
-                self.__count_of_words += len(row.split())
+                self.__count_of_upper_chars+=sum((1 for i in row if i.isupper()))
+                self.__count_of_words += len(row.split(' 'if ' ' in row else string.whitespace))
 
     def __str__(self):
         return (
                     f'count of rows = {self.__count_of_rows}, '
                     f'count of words = {self.__count_of_words}, '
-                    f'count of chars = {self.__count_of_chars}'
-                )
+                    f'count of chars = {self.__count_of_chars}, '
+                    f'count of upper chars = {self.__count_of_upper_chars}'
+               )
 
 if __name__=='__main__':
     _ = CountWords()
