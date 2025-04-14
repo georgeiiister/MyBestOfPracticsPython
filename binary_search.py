@@ -28,15 +28,15 @@ class BinSearch:
 
     @staticmethod
     def bin_exists(collection, value, sort=False) -> bool:
-        return bool(BinSearch.bin_search(collection=iobject,
-                                         value=value,
-                                         sort=sort
-                                         ))
+        return bool(self.__class__.bin_search(collection=iobject,
+                                             value=value,
+                                             sort=sort
+                                             ))
 
     def __init__(self, collection):
         self.__collection = collection
         self.__value = None
-        f_hops = BinSearch.hops_by_bin_search
+        f_hops = self.__class__.hops_by_bin_search
         self.__hops_by_bin_search = f_hops(size=len(self.__collection))
         self.__hops_ = None
 
@@ -53,16 +53,16 @@ class BinSearch:
         if value ==  self.__value:
             result = True
         else:
-            if BinSearch.bin_exists(collection=self.__collection, value=self.__value):
+            if self.__class__.bin_exists(collection=self.__collection, value=self.__value):
                 self.__value = value
             else:
                 result = False
         return result
 
     def search(self, value):
-        self.__value = BinSearch.bin_search(collection=self.__collection,
-                                             value=value
-                                           )
+        self.__value = self.__class__.bin_search(collection=self.__collection,
+                                                 value=value
+                                               )
         return self.__value
 
 if __name__ == '__main__':

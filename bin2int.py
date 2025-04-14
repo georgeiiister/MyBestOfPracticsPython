@@ -20,14 +20,14 @@ class Bin2Int:
     def int(self):
         """get decimal value from binary"""
         if self.__int is None:
-            self.__int = Bin2Int.bin2int(bin_value = self.__bin_value)
+            self.__int = self.__class__.bin2int(bin_value = self.__bin_value)
         return self.__int
 
     @property
     def int_(self):
         """get decimal value from binary"""
         if self.__int is None:
-            self.__int = Bin2Int.bin2int_(bin_value=self.__bin_value)
+            self.__int = self.__class__.bin2int_(bin_value=self.__bin_value)
         return self.__int
 
 
