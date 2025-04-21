@@ -175,7 +175,6 @@ class PrimeNumber:
                                                                      begin_range = begin_range,
                                                                      end_range = end_range
                                                                      )
-
     @property
     def pn(self):
         return self.__prime_number_list
@@ -196,6 +195,20 @@ class MM:
                 result = i
         return result
 
+class EvenNumber:
+    __divider = 2;
+    @staticmethod
+    def even_number_(number_):
+        return not bool(number_ % __class__.__divider)
+    def __init__(self, number_):
+        self.__number = number_
+        self.__even_number = __class__.even_number_(number_ = number_)
+
+    @property
+    def even_number(self):
+        return self.__even_number
+
+
 
 #print(*Operations().operation,sep='\n')
 #print(Power(10,10).power2)
@@ -205,4 +218,4 @@ class MM:
 #print(*PrimeNumber(2,101).pn,sep='\n')
 #print(LastNumber(302,2).yes, LastNumber(302,2).yes2)
 #print(MM.m_x((-1,2,3),0))
-print(UserSum((1,2,3)).sum1)
+print(EvenNumber(9).even_number)
