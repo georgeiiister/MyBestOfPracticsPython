@@ -24,7 +24,7 @@ class Queue:
     def __init__(self, size:int, error_if_lock:Optional[bool] = None):
         self.__size = size
         self.__queue = []
-        self.__lock = error_if_lock or self.__class__._status_lock()
+        self.__status_lock = error_if_lock or self.__class__._status_lock()
         self.__error_if_lock = error_if_lock
 
     def get(self):
@@ -45,7 +45,7 @@ class Queue:
             pickle.dump(self, _file)
 
     def status_lock(self):
-        result = self.__lock
+        result = self.__status_lock
 
         if result and self.__error_if_lock:
             raise Queue.QueueIsLockError
@@ -54,23 +54,23 @@ class Queue:
 
     def __get(self):
         if not self.__queue:
-            raise Queue.QueueIsEmptyError
+            raise self.__class__.QueueIsEmptyError
 
-        if not self.__lock:
+        if not self.__status_lock:
             return self.__queue.pop(0)
 
     def __put(self, obj):
         if len(self.__queue) == self.__size:
-            raise QueueIsFullError
+            raise self.__class__.QueueIsFullError
 
-        if not self.__lock:
+        if not self.__status_lock:
             self.__queue.append(obj)
 
     def __lock(self):
         self.__queue = True
 
     def __unlock(self):
-        self.__lock = False
+        self.__status_lock = False
 
     def __enter__(self):
         self.__lock()
@@ -84,7 +84,7 @@ class Queue:
 if __name__ == '__main__':
     """create Queue"""
 
-    queue = Queue(size = 100_000_0)
+    queue = Queue(size = 10)
 
     import random
     import string
@@ -94,3 +94,6 @@ if __name__ == '__main__':
 
     print(queue.get())
     print(queue.get())
+
+    for i in range(len(queue)):
+        print(queue.get())
