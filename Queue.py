@@ -1,6 +1,7 @@
 import uuid
 import pickle
 from typing import Optional
+
 class Queue:
     class QueueError(Exception):
         pass
