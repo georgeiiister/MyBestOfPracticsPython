@@ -146,6 +146,21 @@ class Factorial:
             result = reduce(lambda i,j:i*j, range(1,value+1))
         return result
 
+    @staticmethod
+    def __factorial_eval(value:int):
+        result = None
+        if value > 0:
+            result = eval('*'.join([str(i) for i in range(1,value+1)]))
+        return result
+
+    @staticmethod
+    def __factorial_for(value:int):
+        result = 1
+        if value > 0:
+            for i in range(1,value+1):
+                result *= 1
+        return result
+
     @property
     def factorial(self):
         return self.__factorial
@@ -160,6 +175,7 @@ class PrimeNumber:
         else:
             result = True
         return result
+
     @staticmethod
     def prime_number_in_range(begin_range:int, end_range:int)->list:
         result = []
