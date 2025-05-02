@@ -14,6 +14,7 @@ class WhatFloor:
     def what_floor(self):
         return self.__what_floor
 
+
 if __name__ == '__main__':
     test = ((12,4),(5,4),(-12,4),(-5,4),(0,4), (1,4), (-1,4))
     for i,j in sorted(test,key=lambda l:abs(l[0])):
