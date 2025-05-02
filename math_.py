@@ -161,6 +161,11 @@ class Factorial:
                 result *= 1
         return result
 
+    @staticmethod
+    def __factorial_recu(value: int):
+        raise NotImplemented
+
+
     @property
     def factorial(self):
         return self.__factorial
