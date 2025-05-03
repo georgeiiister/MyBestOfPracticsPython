@@ -132,6 +132,8 @@ class Factorial:
     class SignValueFactorialError(FactorialError):
         pass
 
+    __factorial_recu = 1
+
     def __init__(self, value):
         self.__value = int(value)
         if self.__value <= 0:
@@ -162,13 +164,20 @@ class Factorial:
         return result
 
     @staticmethod
-    def __factorial_recu(value: int):
-        raise NotImplemented
+    def __factorial_recursive(value: int):
+        if value > 1:
+            Factorial.__factorial_recu *= value
+            Factorial.__factorial_recursive(value-1)
 
+        return Factorial.__factorial_recu
 
     @property
     def factorial(self):
         return self.__factorial
+
+    @property
+    def factorial_recursive(self):
+        return Factorial.__factorial_recursive(value = self.__value)
 
 class PrimeNumber:
     @staticmethod
@@ -206,8 +215,8 @@ class MM:
         """ttype: 1 - max, 0 - min"""
         result = None
         mx_by_type = {
-                        1:lambda r, i: i if r < i else r
-                      , 0:lambda r, i: i if r > i else r
+                        1:lambda r, k: i if r < k else r
+                      , 0:lambda r, k: i if r > k else r
                       }
         for i in obj:
             try:
@@ -220,10 +229,10 @@ class EvenNumber:
     __divider = 2;
     @staticmethod
     def even_number_(number_):
-        return not bool(number_ % __class__.__divider)
+        return not bool(number_ % EvenNumber.__divider)
     def __init__(self, number_):
         self.__number = number_
-        self.__even_number = __class__.even_number_(number_ = number_)
+        self.__even_number = EvenNumber.even_number_(number_ = number_)
 
     @property
     def even_number(self):
@@ -234,7 +243,7 @@ class EvenNumber:
 #print(*Operations().operation,sep='\n')
 #print(Power(10,10).power2)
 #print(Int2list(1234567).reverse)
-#print(Factorial(value = input('value for factorial>> ')).factorial)
+print(Factorial(value = input('value for factorial>> ')).factorial_recursive)
 #print(PrimeNumber.prime_number(7399))
 #print(*PrimeNumber(2,101).pn,sep='\n')
 #print(LastNumber(302,2).yes, LastNumber(302,2).yes2)
