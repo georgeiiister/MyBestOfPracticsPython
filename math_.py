@@ -171,6 +171,15 @@ class Factorial:
 
         return Factorial.__factorial_recu
 
+    @staticmethod
+    def __factorial_recursive2(value: int):
+        if value > 1:
+            if value == 1:
+                return 1
+            return Factorial.__factorial_recursive(value - 1) * value
+
+        return Factorial.__factorial_recu
+
     @property
     def factorial(self):
         return self.__factorial
@@ -178,6 +187,10 @@ class Factorial:
     @property
     def factorial_recursive(self):
         return Factorial.__factorial_recursive(value = self.__value)
+
+    @property
+    def factorial_recursive2(self):
+        return Factorial.__factorial_recursive2(value=self.__value)
 
 class PrimeNumber:
     @staticmethod
@@ -243,7 +256,7 @@ class EvenNumber:
 #print(*Operations().operation,sep='\n')
 #print(Power(10,10).power2)
 #print(Int2list(1234567).reverse)
-print(Factorial(value = input('value for factorial>> ')).factorial_recursive)
+print(Factorial(value = input('value for factorial>> ')).factorial_recursive2)
 #print(PrimeNumber.prime_number(7399))
 #print(*PrimeNumber(2,101).pn,sep='\n')
 #print(LastNumber(302,2).yes, LastNumber(302,2).yes2)
