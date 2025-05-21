@@ -1,6 +1,8 @@
 import math
 from functools import reduce
 from decimal import Decimal
+import threading
+import typing
 
 class UserSum:
     @staticmethod
@@ -139,13 +141,60 @@ class Factorial:
         if self.__value <= 0:
             raise Factorial.SignValueFactorialError
 
-        self.__factorial = Factorial.__factorial(value = self.__value)
+        self.__factorial = self.__class__.__factorial(value = self.__value)
 
     @staticmethod
     def __factorial(value:int)->int:
         result = None
         if value > 0:
             result = reduce(lambda i,j:i*j, range(1,value+1))
+        return result
+
+    @staticmethod
+    def factorials(*args)->dict[int,int]:
+
+        class FactorialThread(threading.Thread):
+            __count_of_threads = 0
+
+            @classmethod
+            def number_thread(cls):
+                cls.__count_of_threads +=1
+                return cls.__count_of_threads
+
+            def __init__(self, values:list[int], dict_of_result:dict[int, int]):
+                super().__init__(name=f'thread {self.__class__.number_thread()}')
+                self.__values = values
+                self.__dict_result = dict_of_result
+
+            def run(self):
+                for value in self.__values:
+                    self.__dict_result[value] = Factorial(value=int(value)).factorial
+
+            @property
+            def dict_result(self):
+                return self.__dict_result
+
+        size_collection = 10 #items
+        result = {}
+        collection_of_values = []
+        threads = []
+
+        for item in args:
+            collection_of_values.append(item)
+            if len(collection_of_values)%size_collection == 0:
+                threads.append(FactorialThread(values=collection_of_values.copy()
+                                               ,dict_of_result = result))
+                collection_of_values.clear()
+
+        if collection_of_values:
+            threads.append(FactorialThread(values=collection_of_values.copy(),dict_of_result = result))
+
+        for thread in threads:
+            thread.start()
+
+        while True:
+            if all((not thread.is_alive() for thread in threads)):
+                break
         return result
 
     @staticmethod
@@ -256,9 +305,11 @@ class EvenNumber:
 #print(*Operations().operation,sep='\n')
 #print(Power(10,10).power2)
 #print(Int2list(1234567).reverse)
-print(Factorial(value = input('value for factorial>> ')).factorial_recursive2)
+#print(Factorial(value = input('value for factorial>> ')).factorial_recursive2)
 #print(PrimeNumber.prime_number(7399))
 #print(*PrimeNumber(2,101).pn,sep='\n')
 #print(LastNumber(302,2).yes, LastNumber(302,2).yes2)
 #print(MM.m_x((-1,2,3),0))
-print(EvenNumber(9).even_number)
+#print(EvenNumber(9).even_number)
+d = Factorial.factorials(*range(1,1000))
+print(*d.items(),sep='\n')
