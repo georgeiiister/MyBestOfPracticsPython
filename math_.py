@@ -239,7 +239,7 @@ class MM:
         return result
 
 class EvenNumber:
-    __divider = 2;
+    __divider = 2
     @staticmethod
     def even_number_(number_):
         return not bool(number_ % EvenNumber.__divider)
