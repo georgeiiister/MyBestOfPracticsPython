@@ -3,6 +3,8 @@ from functools import reduce
 from decimal import Decimal
 import threading
 import typing
+import sys
+
 
 class UserSum:
     @staticmethod
@@ -300,8 +302,6 @@ class EvenNumber:
     def even_number(self):
         return self.__even_number
 
-
-
 #print(*Operations().operation,sep='\n')
 #print(Power(10,10).power2)
 #print(Int2list(1234567).reverse)
@@ -311,5 +311,7 @@ class EvenNumber:
 #print(LastNumber(302,2).yes, LastNumber(302,2).yes2)
 #print(MM.m_x((-1,2,3),0))
 #print(EvenNumber(9).even_number)
-d = Factorial.factorials(*range(1,1000))
-print(*d.items(),sep='\n')
+sys.set_int_max_str_digits(0)
+with open('factorial.txt','tw+') as fl:
+    for i,j in Factorial.factorials(*range(1,10000)).items():
+        fl.write(f'{i} {j}\n')
